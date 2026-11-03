@@ -1,0 +1,140 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Fraunces", "Iowan Old Style", Georgia, serif;
+
+  --color-bg: #f3efe6;
+  --color-surface: #fbf8f2;
+  --color-surface-2: #efeae1;
+  --color-ink: #1c1915;
+  --color-muted: #5e574e;
+  --color-faint: #7a7268;
+  --color-line: #e4dcd0;
+  --color-primary: #0e6b4f;
+  --color-primary-hover: #0b5740;
+  --color-primary-soft: #e4f2eb;
+  --color-on-primary: #f4fbf7;
+  --color-danger: #9b2c2c;
+  --color-danger-soft: #f8e8e6;
+  --color-warning: #8a5a12;
+  --color-warning-soft: #f8efd8;
+
+  --shadow-card: 0 0 0 1px rgb(28 25 21 / 0.06), 0 1px 2px rgb(28 25 21 / 0.04),
+    0 12px 28px -18px rgb(28 25 21 / 0.28);
+}
+
+:root {
+  --sidebar-width: 15.5rem;
+  color-scheme: light;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    background: var(--color-bg);
+    color: var(--color-ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    min-height: 100dvh;
+    background: var(--color-bg);
+    color: var(--color-ink);
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled),
+  input[type="file"]::file-selector-button {
+    cursor: pointer;
+  }
+
+  img {
+    outline: 1px solid rgb(28 25 21 / 0.1);
+    outline-offset: -1px;
+  }
+
+  ::selection {
+    background: var(--color-primary-soft);
+    color: var(--color-ink);
+  }
+}
+
+.app-frame {
+  min-height: 100dvh;
+}
+
+@media (min-width: 768px) {
+  .app-frame {
+    display: grid;
+    grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
+  }
+}
+
+.app-nav {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 30;
+  border-top: 1px solid var(--color-line);
+  background: color-mix(in srgb, var(--color-surface) 92%, transparent);
+  backdrop-filter: blur(12px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.scroll-pad {
+  padding-bottom: calc(4.75rem + env(safe-area-inset-bottom, 0px));
+}
+
+.dock {
+  position: fixed;
+  right: 0;
+  left: 0;
+  z-index: 20;
+  bottom: calc(4rem + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid var(--color-line);
+  background: color-mix(in srgb, var(--color-surface) 96%, transparent);
+  backdrop-filter: blur(12px);
+}
+
+.page-dock-pad {
+  padding-bottom: 6.5rem;
+}
+
+@media (min-width: 768px) {
+  .app-nav {
+    display: none;
+  }
+
+  .scroll-pad {
+    padding-bottom: 2.5rem;
+  }
+
+  .dock {
+    left: var(--sidebar-width);
+    bottom: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
